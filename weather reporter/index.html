@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="st.css">
+    <link rel="shortcut icon" href="weatherimage.jpg">
+    <title>weather reporter</title>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src=".\48d6555a-fa8b-4d27-ba66-e961805876fb.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+        <div class="search">
+            <button id="location" onclick="fetchlocation()"><img src="img.png" alt="" srcset=""></button>
+            <input type="text"  placeholder="enter city name" name="change" class="sea">
+            <button class="searchc"><img src="search.png" ></button>
+            <br>
+               </div><br>
+       
+   <div class="w">
+        <img src="weatherimage.jpg" alt="" class="we"><br>
+        <h1 class="cel"> </h1><br>
+        <h2 class="cit"> </h2>
+       <br><br><br>
+    </div>
+    <div class="detail">
+       <div class="col1">
+        <img src="wi.jpg" alt="">
+        <div>
+            <p class="win"> </p>
+            <p class="wind">wind</p>
+        </div>
+       </div>
+       <div class="col">
+        <img src="hu.png" alt="" srcset="">
+        <div>
+            <p class="hum"> </p>
+            <p class="humi">humidity</p>
+        </div>
+       </div>
+</div>
+</div>
+<script>
+    
+    const si = document.querySelector('.search input');
+    const searchi = document.querySelector('.searchc');
+    const image = document.querySelector('.we');
+    async function getweather(city){
+        var res=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a54eedc5622ed5de42dab75e496e0bbe&units=metric`);
+        if(res.status == '404'){
+            alert("invalid city or country");
+        }
+        var data =await res.json();
+        console.log(data);
+        document.querySelector('.cel').innerHTML = Math.round(data.main.temp)+ "°C";
+        document.querySelector('.cit').innerHTML = data.name;
+        document.querySelector('.sea').innerHTML = data.name;
+        document.querySelector('.win').innerHTML = Math.round(data.wind.speed) + "km/h";
+        document.querySelector('.hum').innerHTML = Math.round(data.main.humidity) + "%";
+        if (data.weather[0].main=="Clouds"){
+            image.src="cloud.png";
+        }
+        else if (data.weather[0].main=="Clear"){
+            image.src="clear-sky.png";
+        }
+        else if (data.weather[0].main=="Rain"){
+            image.src="heavy-rain.png";
+        }
+        else if (data.weather[0].main=="Drizzle"){
+            image.src="drizzle.png";
+        }
+        else if (data.weather[0].main=="Mist"){
+            image.src="hail.png";
+        }
+
+    }
+    searchi.addEventListener('click', ( )  => {
+        getweather(si.value);
+    })
+    async function fetchlocation(){
+    let url='https://ipinfo.io/json?token=9b79f99c1814ea';
+    let resp= await fetch(url);
+    let dt=await resp.json();
+    console.log(dt);
+    if(resp.status == '404'){
+        alert("failed to get current location");
+    }
+    else{
+    getweather(dt.city);}
+   
+ }
+
+    
+</script>
+</body>
+</html>
