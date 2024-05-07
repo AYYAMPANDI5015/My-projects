@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jeya doors</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="above_nav"></div><br>
+    <div class="header">
+       <a href=""> <img src="logo.png" alt="" class="log"></a>
+       <nav id="navi">
+           <ul id="list">
+            <li><a class="active" href="index.html">home</a></li>
+           <li><a href="doors.html">doors</a></li>
+           <li><a href="catalogue.html">catalogue</a></li>
+           <li><a href="about.html">about us</a></li>
+           <li><a href="contact.html">contact</a></li>
+       </ul>
+       </nav>
+    </div>
+    <br>
+    <div class="form">
+       <form action="">
+          <h3>contact form</h3>
+          <br>
+          <br> <div>
+          <label for="">NAME:   </label> 
+          <input type="text" value="" id="nam">
+        </div>
+          <br>
+          <div>
+          <label for="">EMAIL:    </label>
+           <input type="email" class="email">
+           <br>
+        </div>
+        <br>
+        <div class="ph">
+
+            <label for="">PHONE:    </label>
+            <input type="text" class="phone">
+        </div>
+        <br>
+        <div>
+            <label for="">CITY:</label>
+            <input type="text" class="city">
+        </div>
+        <br>
+        <div>
+            <label for="">MESSAGE:</label>
+            <input type="textarea" class="message">
+        </div>
+        <br>
+        <button onclick="sendwhatsapp()">send</button>
+    </form>
+    </div>
+
+    <script>
+        function sendwhatsapp() {
+            var phonenumber = "+918438508096";
+
+            var name = document.getElementById("nam").value;
+            var email = document.querySelector(".email").value;
+            var phone = document.querySelector(".phone").value;
+            var city = document.querySelector(".city").value;
+            var message = document.querySelector(".message").value;
+
+            var url = "https://wa.me/" + phonenumber + "?text="
+                + "Name : " + name + "%0a"
+                + "Email : " + email + "%0a"
+                + "Phone: " + phone + "%0a"
+                + "City: " + city + "%0a"
+                + "Message : " + message
+                + "%0a%0a"
+                ;
+
+            window.open(url, '_blank').focus();
+        }
+    </script>
+        
+    </body>
+    </html>
